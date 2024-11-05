@@ -1,6 +1,7 @@
 package com.example.oop2a4zms.Controllers;
 
 import com.example.oop2a4zms.HelloApplication;
+import com.example.oop2a4zms.Helpers.AlertHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class CompositeAnimalCollectionViewController {
 //        try {
             int selectedIndex = this.aAnimalCollectionListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex == -1) {
-//                TODO: AlertHelper.showWarning("Please select a zoo area!");
+                AlertHelper.showWarning("Please select a zoo area!");
             } else {
 //                AnimalCollection selectedCollection = this.aCompositeAnimalCollection.getSelectedIndex(selectedIndex);
 //                if (selectedCollection instanceof Enclosure) {
