@@ -121,8 +121,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="closeButton" mnemonicParsing="false" text="Close" GridPane.columnIndex="1" />
+                   <Button fx:id="saveButton" mnemonicParsing="false" text="Save" onAction="#handleSaveButton" />
+                   <Button fx:id="closeButton" mnemonicParsing="false" text="Close" onAction="#handleCloseButton" GridPane.columnIndex="1" />
+
                </children>
             </GridPane>
          </children>

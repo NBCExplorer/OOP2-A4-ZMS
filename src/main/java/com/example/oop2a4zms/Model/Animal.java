@@ -49,7 +49,8 @@ public class Animal {
     }
 
     public void setWeight(double weight) {
-        if (weight >= 0) { // Simple validation to ensure non-negative weight
+        if (weight >= 0) {
+            // Simple validation to ensure non-negative weight
             this.weight = weight;
         }
     }
