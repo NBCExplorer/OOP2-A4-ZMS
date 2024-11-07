@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 
-public class EnclosureViewController {
+public class  EnclosureViewController {
     @FXML private ListView<Animal> aEnclosureListView;
 
     private Enclosure aEnclosure;
