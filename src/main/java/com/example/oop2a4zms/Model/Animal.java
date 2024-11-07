@@ -1,57 +1,56 @@
 package com.example.oop2a4zms.Model;
 
 public class Animal {
-    private String name;
-    private int age;
-    private String sex;
-    private double weight;
+    private String aName;
+    private int aAge;
+    private String aSex;
+    private double aWeight;
 
     // Constructor
-    public Animal(String name, int age, String sex, double weight) {
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-        this.weight = weight;
+    public Animal(String pName, int pAge, String pSex, double pWeight) {
+        this.aName = pName;
+        this.aAge = pAge;
+        this.aSex = pSex;
+        this.aWeight = pWeight;
     }
 
-    // Getter and Setter for Name
+
     public String getName() {
-        return name;
+        return aName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String pName) {
+        this.aName = pName;
     }
 
-    // Getter and Setter for Age
+
     public int getAge() {
-        return age;
+        return aAge;
     }
 
-    public void setAge(int age) {
-        if (age >= 0) { // Simple validation to ensure non-negative age
-            this.age = age;
+    public void setAge(int pAge) {
+        if (pAge >= 0) {
+            this.aAge = pAge;
         }
     }
 
-    // Getter and Setter for Sex
+
     public String getSex() {
-        return sex;
+        return aSex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setSex(String pSex) {
+        this.aSex = pSex;
     }
 
-    // Getter and Setter for Weight
+
     public double getWeight() {
-        return weight;
+        return aWeight;
     }
 
-    public void setWeight(double weight) {
-        if (weight >= 0) {
-            // Simple validation to ensure non-negative weight
-            this.weight = weight;
+    public void setWeight(double pWeight) {
+        if (pWeight >= 0) {
+            this.aWeight = pWeight;
         }
     }
 
@@ -59,10 +58,10 @@ public class Animal {
     @Override
     public String toString() {
         return "Animal{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ", weight=" + weight +
+                "name='" + aName + '\'' +
+                ", age=" + aAge +
+                ", sex='" + aSex + '\'' +
+                ", weight=" + aWeight +
                 '}';
     }
 }
