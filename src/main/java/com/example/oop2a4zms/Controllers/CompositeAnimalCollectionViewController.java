@@ -1,5 +1,7 @@
 package com.example.oop2a4zms.Controllers;
 
+import com.example.oop2a4zms.Model.CompositeAnimalCollection;
+import com.example.oop2a4zms.Model.Enclosure;
 import com.example.oop2a4zms.ZooApplication;
 import com.example.oop2a4zms.Helpers.AlertHelper;
 import javafx.event.ActionEvent;
@@ -18,8 +20,7 @@ public class CompositeAnimalCollectionViewController {
     @FXML
     private ListView<String> aAnimalCollectionListView;
 
-    // TODO: To be added once CompositeAnimalCollection class is built
-//    private CompositeAnimalCollection aCompositeAnimalCollection = new CompositeAnimalCollection();
+    private CompositeAnimalCollection aCompositeAnimalCollection = new CompositeAnimalCollection();
 
     @FXML
     protected void onBackButtonClick() {
@@ -48,23 +49,24 @@ public class CompositeAnimalCollectionViewController {
 //        }
     }
 
-    // TODO: Uncomment once enclosure view and controller is built
-//    private void launchEnclosureViewController(ActionEvent pEvent, Enclosure pEnclosure) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("enclosure-view.fxml"));
-//        Parent view = fxmlLoader.load();
-//        EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
-//        newEnclosureViewController.setEnclosure(pEnclosure);
-//        buildSceneAndStage(pEvent, view, pEnclosure.getName());
-//    }
+    private void launchEnclosureViewController(ActionEvent pEvent, Enclosure pEnclosure) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("enclosure-view.fxml"));
+        Parent view = fxmlLoader.load();
+        EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
+        // TODO: Fix
+        //newEnclosureViewController.setEnclosure(pEnclosure);
+        buildSceneAndStage(pEvent, view, pEnclosure.getName());
+    }
 
     // TODO: Uncomment once CompositeAnimalCollection is built
-//    private void launchNextCompositeAnimalController(ActionEvent pEvent, CompositeAnimalCollection pComposite) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("composite-animal-view.fxml"));
-//        Parent parent = fxmlLoader.load();
-//        CompositeAnimalCollectionViewController newCompositeAnimalCollectionViewController = fxmlLoader.getController();
-//        newCompositeAnimalCollectionViewController.setCompositeAnimal(pComposite);
-//        buildSceneAndStage(pEvent, parent, pComposite.getName());
-//    }
+    private void launchNextCompositeAnimalController(ActionEvent pEvent, CompositeAnimalCollection pComposite) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("composite-animal-view.fxml"));
+        Parent parent = fxmlLoader.load();
+        CompositeAnimalCollectionViewController newCompositeAnimalCollectionViewController = fxmlLoader.getController();
+        // TODO: Fix
+        // newCompositeAnimalCollectionViewController.setCompositeAnimal(pComposite);
+        buildSceneAndStage(pEvent, parent, pComposite.getName());
+    }
 
     private void buildSceneAndStage(ActionEvent pEvent, Parent view, String name) {
         Scene nextScene = new Scene(view, 500, 500);
@@ -77,8 +79,8 @@ public class CompositeAnimalCollectionViewController {
     }
 
     // TODO: Uncomment once CompositeAnimalCollection is built
-//    public void setCompositeAnimal(CompositeAnimalCollection pCompositeAnimalCollection) {
-//        this.aCompositeAnimalCollection = pCompositeAnimalCollection;
-//        this.aAnimalCollectionListView.getItems().setAll(pCompositeAnimalCollection.getContents());
-//    }
+    public void setCompositeAnimal(CompositeAnimalCollection pCompositeAnimalCollection) {
+        this.aCompositeAnimalCollection = pCompositeAnimalCollection;
+        // TODO:
+    }
 }

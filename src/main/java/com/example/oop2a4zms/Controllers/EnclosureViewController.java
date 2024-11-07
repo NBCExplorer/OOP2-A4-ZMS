@@ -19,7 +19,8 @@ public class EnclosureViewController {
 
     @FXML
     public void initialize() {
-        aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
+        // TODO: Work with Itertator instead.
+        // aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
     }
 
     @FXML
@@ -51,7 +52,8 @@ public class EnclosureViewController {
     }
 
     private void refreshAnimalList() {
-        aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
+        // TODO: Work with Itertator instead.
+        // aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
     }
 }
 
