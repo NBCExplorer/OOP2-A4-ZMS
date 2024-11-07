@@ -1,5 +1,6 @@
 package com.example.oop2a4zms.Controllers;
 
+import com.example.oop2a4zms.Model.AnimalCollection;
 import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
 import com.example.oop2a4zms.ZooApplication;
@@ -30,23 +31,23 @@ public class CompositeAnimalCollectionViewController {
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) {
-//        try {
+        try {
             int selectedIndex = this.aAnimalCollectionListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex == -1) {
                 AlertHelper.showWarning("Please select a zoo area!");
             } else {
-//                AnimalCollection selectedCollection = this.aCompositeAnimalCollection.getSelectedIndex(selectedIndex);
-//                if (selectedCollection instanceof Enclosure) {
-//                    this.launchEnclosureViewController(pEvent, (Enclosure) selectedCollection);
-//                } else if (selectedCollection instanceof CompositeAnimalCollection) {
-//                    this.launchNextCompositeAnimalController(pEvent, (CompositeAnimalCollection) selectedCollection);
-//                } else {
-//                    throw new RuntimeException("This should not happen!");
-//                }
+                AnimalCollection selectedCollection = this.aCompositeAnimalCollection.getSelectedIndex(selectedIndex);
+                if (selectedCollection instanceof Enclosure) {
+                    this.launchEnclosureViewController(pEvent, (Enclosure) selectedCollection);
+                } else if (selectedCollection instanceof CompositeAnimalCollection) {
+                    this.launchNextCompositeAnimalController(pEvent, (CompositeAnimalCollection) selectedCollection);
+                } else {
+                    throw new RuntimeException("This should not happen!");
+                }
             }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void launchEnclosureViewController(ActionEvent pEvent, Enclosure pEnclosure) throws IOException {
@@ -81,6 +82,7 @@ public class CompositeAnimalCollectionViewController {
     // TODO: Uncomment once CompositeAnimalCollection is built
     public void setCompositeAnimal(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
-        // TODO:
+        // TODO Fix
+        // this.aAnimalCollectionListView.getItems().setAll(pCompositeAnimalCollection.getContents());
     }
 }
