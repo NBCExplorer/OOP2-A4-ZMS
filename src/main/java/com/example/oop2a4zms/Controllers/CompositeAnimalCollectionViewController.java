@@ -46,7 +46,7 @@ public class CompositeAnimalCollectionViewController {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertHelper.showWarning("An IO error occurred: " + e.getMessage());
         }
     }
 
@@ -54,12 +54,11 @@ public class CompositeAnimalCollectionViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("enclosure-view.fxml"));
         Parent view = fxmlLoader.load();
         EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
-        // TODO: Fix
+        // TODO: Uncomment next line once setEnclosure is implemented.
         // newEnclosureViewController.setEnclosure(pEnclosure);
         buildSceneAndStage(pEvent, view, pEnclosure.getName());
     }
 
-    // TODO: Uncomment once CompositeAnimalCollection is built
     private void launchNextCompositeAnimalController(ActionEvent pEvent, CompositeAnimalCollection pComposite) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("composite-animal-view.fxml"));
         Parent parent = fxmlLoader.load();
