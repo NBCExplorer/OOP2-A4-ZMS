@@ -1,13 +1,14 @@
 package com.example.oop2a4zms.Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class Enclosure implements AnimalCollection, Iterable<Animal> {
     private String aName;
     private String aType;
-    private List<Animal> aAnimals = new ArrayList<>();
+    private List<Animal> aAnimal = new ArrayList<>();
 
     public Enclosure(String pName, String pType) {
         this.aName = pName;
@@ -16,21 +17,23 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
 
 
     public void addAnimal(Animal pAnimal) {
-        aAnimals.add(pAnimal);
+        aAnimal.add(pAnimal);
+    }
+
+    public List<Animal> getAnimal() {
+        return new ArrayList<>(aAnimal);  // return a copy for encapsulation
     }
 
     public void removeAnimal(Animal pAnimal) {
-        aAnimals.remove(pAnimal);
+        aAnimal.remove(pAnimal);
     }
 
     // TODO: We are exposing the animals here, since they are mutable, breaking encapsulation
     // Suggestion: Make both classes Iterable instead
     public Iterator<Animal> iterator() {
-        return aAnimals.iterator();
+        return aAnimal.iterator();
     }
-//    public List<Animal> getAnimals() {
-//        return new ArrayList<>(aAnimals);
-//    }
+
 
     // Additional getter methods, following the same convention
     public String getName() {
@@ -40,10 +43,17 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
     @Override
     public void setName(String name) {
         // TODO: Set name securely
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+        aName = name;
     }
 
-    public String getType() {
-        return aType;
+    public void getType(String type) {
+        if (type == null || type.trim().isEmpty()) {
+            throw new IllegalArgumentException("type cannot be null or empty");
+        }
+        aType = type;
     }
 }
 

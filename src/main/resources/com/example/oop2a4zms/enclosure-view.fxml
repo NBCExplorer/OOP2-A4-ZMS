@@ -23,10 +23,10 @@
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
-            <Button fx:id="addButton" onAction="#addAnimalToEnclosure" text="Add" />
-            <Button fx:id="displayModifyButton" onAction="#displayModifyAnimal" text="Display/Modify" />
-            <Button fx:id="deleteButton" onAction="#deleteAnimalFromEnclosure" text="Delete" />
-            <Button fx:id="backButton" onAction="#goBack" text="Back" />
+            <Button fx:id="aAddButton" onAction="#addAnimalToEnclosure" text="Add" />
+            <Button fx:id="aDisplayModifyButton" onAction="#displayModifyAnimal" text="Display/Modify" />
+            <Button fx:id="aDeleteButton" onAction="#deleteAnimalFromEnclosure" text="Delete" />
+            <Button fx:id="aBackButton" onAction="#goBack" text="Back" />
         </VBox>
     </children>
 </HBox>
