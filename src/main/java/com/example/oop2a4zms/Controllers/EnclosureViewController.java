@@ -1,14 +1,22 @@
 package com.example.oop2a4zms.Controllers;
 
 import com.example.oop2a4zms.Model.Animal;
+import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class  EnclosureViewController {
     @FXML private ListView<Animal> aEnclosureListView;
+
+    private CompositeAnimalCollection bigCatsCollection;
 
     private Enclosure aEnclosure;
 
@@ -19,8 +27,19 @@ public class  EnclosureViewController {
 
     @FXML
     public void initialize() {
-        // TODO: Work with Itertator instead.
-        // aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
+        List<Animal> animalList = new ArrayList<>();
+        Iterator<Animal> iterator = aEnclosure.iterator();
+
+        while (iterator.hasNext()) {
+            animalList.add(iterator.next());
+        }
+
+        aEnclosureListView.setItems(FXCollections.observableArrayList(animalList));
+    }
+
+    public void setEnclosure(Enclosure enclosure) {
+        this.aEnclosure = enclosure;
+        refreshAnimalList();
     }
 
     @FXML
@@ -32,7 +51,7 @@ public class  EnclosureViewController {
     public void displayModifyAnimal() {
         Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
-            // Display/modify the selected animal's details
+
         }
     }
 
@@ -53,7 +72,17 @@ public class  EnclosureViewController {
 
     private void refreshAnimalList() {
         // TODO: Work with Itertator instead.
-        // aEnclosureListView.setItems(FXCollections.observableArrayList(aEnclosure.getAnimals()));
+        if (aEnclosure != null) {
+            List<Animal> animalList = new ArrayList<>();
+            Iterator<Animal> iterator = aEnclosure.iterator();
+
+            while (iterator.hasNext()) {
+                animalList.add(iterator.next());
+            }
+
+            ObservableList<Animal> observableAnimalList = FXCollections.observableArrayList(animalList);
+            aEnclosureListView.setItems(observableAnimalList);
+        }
     }
 }
 
