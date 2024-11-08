@@ -55,7 +55,7 @@ public class CompositeAnimalCollectionViewController {
         Parent view = fxmlLoader.load();
         EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
         // TODO: Fix
-        //newEnclosureViewController.setEnclosure(pEnclosure);
+        // newEnclosureViewController.setEnclosure(pEnclosure);
         buildSceneAndStage(pEvent, view, pEnclosure.getName());
     }
 
@@ -64,7 +64,6 @@ public class CompositeAnimalCollectionViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("composite-animal-view.fxml"));
         Parent parent = fxmlLoader.load();
         CompositeAnimalCollectionViewController newCompositeAnimalCollectionViewController = fxmlLoader.getController();
-        // TODO: Fix
         newCompositeAnimalCollectionViewController.setCompositeAnimalCollection(pComposite);
         buildSceneAndStage(pEvent, parent, pComposite.getName());
     }
@@ -79,7 +78,6 @@ public class CompositeAnimalCollectionViewController {
         nextStage.showAndWait();
     }
 
-    // TODO: Uncomment once CompositeAnimalCollection is built
     public void setCompositeAnimalCollection(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
         for(AnimalCollection collection : pCompositeAnimalCollection) {

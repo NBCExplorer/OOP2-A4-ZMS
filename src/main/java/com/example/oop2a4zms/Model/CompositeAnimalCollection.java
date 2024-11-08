@@ -25,7 +25,7 @@ public class CompositeAnimalCollection implements AnimalCollection, Iterable<Ani
             throw new IllegalArgumentException("Name cannot be null");
         } else if (pName.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
-        } else if (aName.length() >= 256) {
+        } else if (pName.length() >= 256) {
             throw new IllegalArgumentException("Name cannot exceed 255 characters");
         }
         this.aName = pName;
