@@ -65,7 +65,7 @@ public class CompositeAnimalCollectionViewController {
         Parent parent = fxmlLoader.load();
         CompositeAnimalCollectionViewController newCompositeAnimalCollectionViewController = fxmlLoader.getController();
         // TODO: Fix
-        // newCompositeAnimalCollectionViewController.setCompositeAnimal(pComposite);
+        newCompositeAnimalCollectionViewController.setCompositeAnimalCollection(pComposite);
         buildSceneAndStage(pEvent, parent, pComposite.getName());
     }
 
@@ -80,7 +80,7 @@ public class CompositeAnimalCollectionViewController {
     }
 
     // TODO: Uncomment once CompositeAnimalCollection is built
-    public void setCompositeAnimal(CompositeAnimalCollection pCompositeAnimalCollection) {
+    public void setCompositeAnimalCollection(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
         // TODO Fix
         // this.aAnimalCollectionListView.getItems().setAll(pCompositeAnimalCollection.getContents());
