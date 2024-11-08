@@ -1,9 +1,7 @@
 package com.example.oop2a4zms.Model;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CompositeAnimalCollection implements AnimalCollection, Iterable<AnimalCollection>{
@@ -23,7 +21,13 @@ public class CompositeAnimalCollection implements AnimalCollection, Iterable<Ani
     }
 
     public void setName(String pName) {
-        // TODO: Input Validation
+        if (pName == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        } else if (pName.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        } else if (aName.length() >= 256) {
+            throw new IllegalArgumentException("Name cannot exceed 255 characters");
+        }
         this.aName = pName;
     }
 
