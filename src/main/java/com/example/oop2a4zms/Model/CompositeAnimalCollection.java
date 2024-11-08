@@ -38,5 +38,9 @@ public class CompositeAnimalCollection implements AnimalCollection, Iterable<Ani
     public AnimalCollection getSelectedIndex(int selectedIndex) {
         return this.aCollections.get(selectedIndex);
     }
+
+    public String toString() {
+        return this.getName();
+    }
 }
 

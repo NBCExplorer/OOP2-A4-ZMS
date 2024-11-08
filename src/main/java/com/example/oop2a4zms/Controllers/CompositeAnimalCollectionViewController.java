@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class CompositeAnimalCollectionViewController {
     @FXML
-    private ListView<String> aAnimalCollectionListView;
+    private ListView<AnimalCollection> aAnimalCollectionListView;
 
     private CompositeAnimalCollection aCompositeAnimalCollection = new CompositeAnimalCollection();
 
@@ -82,7 +82,8 @@ public class CompositeAnimalCollectionViewController {
     // TODO: Uncomment once CompositeAnimalCollection is built
     public void setCompositeAnimalCollection(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
-        // TODO Fix
-        // this.aAnimalCollectionListView.getItems().setAll(pCompositeAnimalCollection.getContents());
+        for(AnimalCollection collection : pCompositeAnimalCollection) {
+            this.aAnimalCollectionListView.getItems().add(collection);
+        }
     }
 }
