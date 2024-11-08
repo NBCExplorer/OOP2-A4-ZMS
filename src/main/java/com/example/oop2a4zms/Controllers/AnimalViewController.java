@@ -60,15 +60,8 @@ public class AnimalViewController {
         }
 
         Animal animal = new Animal(name, age, sex, weight);
-        System.out.println("Saving animal details");
-        System.out.println("Animal saved: " + animal);
+        System.out.println("Animal saved successfully: " + animal);
 
-
-        System.out.println("Name: " + animal.getName());
-        System.out.println("Sex: " + animal.getSex());
-        System.out.println("Age: " + animal.getAge());
-        System.out.println("Weight: " + animal.getWeight() + "kg");
-        System.out.println("Animal saved successfully!");
     }
 
     @FXML
@@ -94,8 +87,15 @@ public class AnimalViewController {
         return saveButton;
     }
 
+    public void setSaveButton(Button saveButton) {
+        this.saveButton = saveButton;
+    }
+
     public Button getCloseButton() {
         return closeButton;
     }
 
+    public void setCloseButton(Button closeButton) {
+        this.closeButton = closeButton;
+    }
 }
