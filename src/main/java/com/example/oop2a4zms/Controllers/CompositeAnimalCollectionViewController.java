@@ -1,5 +1,6 @@
 package com.example.oop2a4zms.Controllers;
 
+import com.example.oop2a4zms.Model.AnimalCollection;
 import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
 import com.example.oop2a4zms.ZooApplication;
@@ -18,7 +19,7 @@ import java.io.IOException;
 
 public class CompositeAnimalCollectionViewController {
     @FXML
-    private ListView<String> aAnimalCollectionListView;
+    private ListView<AnimalCollection> aAnimalCollectionListView;
 
     private CompositeAnimalCollection aCompositeAnimalCollection = new CompositeAnimalCollection();
 
@@ -30,41 +31,39 @@ public class CompositeAnimalCollectionViewController {
 
     @FXML
     protected void onViewButtonClick(ActionEvent pEvent) {
-//        try {
+        try {
             int selectedIndex = this.aAnimalCollectionListView.getSelectionModel().getSelectedIndex();
             if (selectedIndex == -1) {
                 AlertHelper.showWarning("Please select a zoo area!");
             } else {
-//                AnimalCollection selectedCollection = this.aCompositeAnimalCollection.getSelectedIndex(selectedIndex);
-//                if (selectedCollection instanceof Enclosure) {
-//                    this.launchEnclosureViewController(pEvent, (Enclosure) selectedCollection);
-//                } else if (selectedCollection instanceof CompositeAnimalCollection) {
-//                    this.launchNextCompositeAnimalController(pEvent, (CompositeAnimalCollection) selectedCollection);
-//                } else {
-//                    throw new RuntimeException("This should not happen!");
-//                }
+                AnimalCollection selectedCollection = this.aCompositeAnimalCollection.getSelectedIndex(selectedIndex);
+                if (selectedCollection instanceof Enclosure) {
+                    this.launchEnclosureViewController(pEvent, (Enclosure) selectedCollection);
+                } else if (selectedCollection instanceof CompositeAnimalCollection) {
+                    this.launchNextCompositeAnimalController(pEvent, (CompositeAnimalCollection) selectedCollection);
+                } else {
+                    throw new RuntimeException("This should not happen!");
+                }
             }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        } catch (IOException e) {
+            AlertHelper.showWarning("An IO error occurred: " + e.getMessage());
+        }
     }
 
     private void launchEnclosureViewController(ActionEvent pEvent, Enclosure pEnclosure) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("enclosure-view.fxml"));
         Parent view = fxmlLoader.load();
         EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
-        // TODO: Fix
-        //newEnclosureViewController.setEnclosure(pEnclosure);
+        // TODO: Uncomment next line once setEnclosure is implemented.
+        // newEnclosureViewController.setEnclosure(pEnclosure);
         buildSceneAndStage(pEvent, view, pEnclosure.getName());
     }
 
-    // TODO: Uncomment once CompositeAnimalCollection is built
     private void launchNextCompositeAnimalController(ActionEvent pEvent, CompositeAnimalCollection pComposite) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("composite-animal-view.fxml"));
         Parent parent = fxmlLoader.load();
         CompositeAnimalCollectionViewController newCompositeAnimalCollectionViewController = fxmlLoader.getController();
-        // TODO: Fix
-        // newCompositeAnimalCollectionViewController.setCompositeAnimal(pComposite);
+        newCompositeAnimalCollectionViewController.setCompositeAnimalCollection(pComposite);
         buildSceneAndStage(pEvent, parent, pComposite.getName());
     }
 
@@ -78,9 +77,10 @@ public class CompositeAnimalCollectionViewController {
         nextStage.showAndWait();
     }
 
-    // TODO: Uncomment once CompositeAnimalCollection is built
-    public void setCompositeAnimal(CompositeAnimalCollection pCompositeAnimalCollection) {
+    public void setCompositeAnimalCollection(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
-        // TODO:
+        for(AnimalCollection collection : pCompositeAnimalCollection) {
+            this.aAnimalCollectionListView.getItems().add(collection);
+        }
     }
 }

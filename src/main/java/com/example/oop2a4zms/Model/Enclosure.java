@@ -45,5 +45,9 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
     public String getType() {
         return aType;
     }
+
+    public String toString() {
+        return this.getName();
+    }
 }
 
