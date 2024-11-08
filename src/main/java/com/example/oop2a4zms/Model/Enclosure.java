@@ -14,6 +14,7 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
         this.aType = pType;
     }
 
+
     public void addAnimal(Animal pAnimal) {
         aAnimals.add(pAnimal);
     }
