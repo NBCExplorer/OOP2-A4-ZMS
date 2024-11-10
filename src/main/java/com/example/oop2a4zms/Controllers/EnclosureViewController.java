@@ -1,6 +1,7 @@
 package com.example.oop2a4zms.Controllers;
 
 import com.example.oop2a4zms.Model.Animal;
+import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,8 @@ import java.util.List;
 
 public class  EnclosureViewController {
     @FXML private ListView<Animal> aEnclosureListView;
+
+    private CompositeAnimalCollection bigCatsCollection;
 
     private Enclosure aEnclosure;
 
@@ -54,7 +57,7 @@ public class  EnclosureViewController {
     public void displayModifyAnimal() {
         Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
-            // Display/modify the selected animal's details
+
         }
     }
 
@@ -79,7 +82,7 @@ public class  EnclosureViewController {
             Parent animalView = fxmlLoader.load();
 
             AnimalViewController animalController = fxmlLoader.getController();
-            animalController.setAnimal(selectedAnimal);
+            animalController.setAnimal(selectedAnimal); // Pass the selected Animal to AnimalViewController
 
             Stage stage = new Stage();
             stage.setScene(new Scene(animalView));
@@ -105,4 +108,3 @@ public class  EnclosureViewController {
         }
     }
 }
-
