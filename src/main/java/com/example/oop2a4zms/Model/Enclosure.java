@@ -23,7 +23,9 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
     }
 
     public void addAnimal(Animal pAnimal) {
-        aAnimal.add(pAnimal);
+        if (pAnimal != null) {
+            aAnimal.add(pAnimal);
+        }
     }
 
 

@@ -9,6 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -22,9 +25,13 @@ import java.util.List;
 
 
 public class  EnclosureViewController {
-    @FXML private ListView<Animal> aEnclosureListView;
+    @FXML private ListView<String> aEnclosureListView;
 
     private Enclosure aEnclosure;
+    @FXML private TextField nameTextField;
+    @FXML private TextField ageTextField;
+    @FXML private TextField weightTextField;
+    @FXML private ComboBox<String> sexComboBox;
 
     public EnclosureViewController() {
 
@@ -44,45 +51,87 @@ public class  EnclosureViewController {
 
     @FXML
     public void addAnimalToEnclosure() {
+        try {
+            String name = nameTextField.getText();
+            int age = Integer.parseInt(ageTextField.getText());
+            String sex = sexComboBox.getValue();
+            double weight = Double.parseDouble(weightTextField.getText());
 
+            Animal newAnimal = new Animal(name, age, sex, weight);
+            aEnclosure.addAnimal(newAnimal);
+            refreshAnimalList();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Please enter valid values for age and weight.");
+            alert.showAndWait();
+        }
     }
 
 
     public void displayModifyAnimal() {
-        Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
-        if (selectedAnimal != null) {
-
+        String selectedAnimalName = aEnclosureListView.getSelectionModel().getSelectedItem();
+        if (selectedAnimalName != null) {
+            Animal selectedAnimal = findAnimalByName(selectedAnimalName);
+            if (selectedAnimal != null) {
+                launchAnimalViewController(selectedAnimal);
+            }
         }
     }
 
     @FXML
     public void deleteAnimalFromEnclosure() {
-        Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
-        if (selectedAnimal != null) {
-            aEnclosure.removeAnimal(selectedAnimal);
-            refreshAnimalList();
+        String selectedAnimalName = aEnclosureListView.getSelectionModel().getSelectedItem();
+        if (selectedAnimalName != null) {
+            Animal selectedAnimal = findAnimalByName(selectedAnimalName);
+            if (selectedAnimal != null) {
+                aEnclosure.removeAnimal(selectedAnimal);
+                refreshAnimalList();
+            }
         }
     }
 
     @FXML
     public void goBack() {
-        // Code to go back to the previous view or main menu
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("/com/example/oop2a4zms/composite-animal-view.fxml"));
+            Parent parent = fxmlLoader.load();
 
+            CompositeAnimalCollectionViewController controller = fxmlLoader.getController();
+            controller.initializeView(); // Call the initialize method to set up the view
+
+            Stage stage = (Stage) aEnclosureListView.getScene().getWindow();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Composite Animal Collection");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("Error: Unable to load the FXML file or set the scene.");
+            e.printStackTrace();
+        }
     }
+
+private Animal findAnimalByName(String name) {
+    for (Animal animal : aEnclosure) {
+        if (animal.getName().equals(name)) {
+            return animal;
+        }
+    }
+    return null;
+}
 
 
 
     private void refreshAnimalList() {
         // TODO: Work with Itertator instead.
         if (aEnclosure != null) {
-            List<Animal> animalList = new ArrayList<>();
-
+            List<String> animalNames = new ArrayList<>();
             for (Animal animal : aEnclosure) {
-                animalList.add(animal);
+                animalNames.add(animal.getName());
             }
-
-            ObservableList<Animal> observableAnimalList = FXCollections.observableArrayList(animalList);
-            aEnclosureListView.setItems(observableAnimalList);
+            ObservableList<String> observableAnimalNames = FXCollections.observableArrayList(animalNames);
+            aEnclosureListView.setItems(observableAnimalNames);
         }
     }
 

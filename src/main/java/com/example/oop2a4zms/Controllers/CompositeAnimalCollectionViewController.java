@@ -1,5 +1,6 @@
 package com.example.oop2a4zms.Controllers;
 
+import com.example.oop2a4zms.Helpers.ImportHelper;
 import com.example.oop2a4zms.Model.AnimalCollection;
 import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
@@ -22,6 +23,19 @@ public class CompositeAnimalCollectionViewController {
     private ListView<AnimalCollection> aAnimalCollectionListView;
 
     private CompositeAnimalCollection aCompositeAnimalCollection = new CompositeAnimalCollection();
+
+    @FXML
+    public void initialize() {
+        initializeView();
+    }
+
+    public void initializeView() {
+        aCompositeAnimalCollection = ImportHelper.createAnimals();
+        aAnimalCollectionListView.getItems().clear();
+        for (AnimalCollection collection : aCompositeAnimalCollection) {
+            aAnimalCollectionListView.getItems().add(collection);
+        }
+    }
 
     @FXML
     protected void onBackButtonClick() {
@@ -79,6 +93,7 @@ public class CompositeAnimalCollectionViewController {
 
     public void setCompositeAnimalCollection(CompositeAnimalCollection pCompositeAnimalCollection) {
         this.aCompositeAnimalCollection = pCompositeAnimalCollection;
+        aAnimalCollectionListView.getItems().clear();
         for(AnimalCollection collection : pCompositeAnimalCollection) {
             this.aAnimalCollectionListView.getItems().add(collection);
         }
