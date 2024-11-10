@@ -98,4 +98,7 @@ public class AnimalViewController {
     public void setCloseButton(Button closeButton) {
         this.closeButton = closeButton;
     }
+
+    public void setAnimal(Animal selectedAnimal) {
+    }
 }

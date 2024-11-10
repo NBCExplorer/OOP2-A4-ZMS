@@ -1,10 +1,15 @@
 package com.example.oop2a4zms.Controllers;
 
 import com.example.oop2a4zms.Model.Animal;
-import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -15,8 +20,6 @@ import java.util.List;
 
 public class  EnclosureViewController {
     @FXML private ListView<Animal> aEnclosureListView;
-
-    private CompositeAnimalCollection bigCatsCollection;
 
     private Enclosure aEnclosure;
 
@@ -51,7 +54,7 @@ public class  EnclosureViewController {
     public void displayModifyAnimal() {
         Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
-
+            // Display/modify the selected animal's details
         }
     }
 
@@ -69,6 +72,23 @@ public class  EnclosureViewController {
     public void goBack() {
         // Code to go back to the previous view or main menu
     }
+
+    private void launchAnimalViewController(Animal selectedAnimal) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("animal-view.fxml"));
+            Parent animalView = fxmlLoader.load();
+
+            AnimalViewController animalController = fxmlLoader.getController();
+            animalController.setAnimal(selectedAnimal);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(animalView));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void refreshAnimalList() {
         // TODO: Work with Itertator instead.
