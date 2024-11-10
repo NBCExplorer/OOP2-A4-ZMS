@@ -6,23 +6,23 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Enclosure implements AnimalCollection, Iterable<Animal> {
-    private String aName;
-    private String aType;
+    public String aName;
+    public String aType;
     private List<Animal> aAnimal = new ArrayList<>();
+    private final List<AnimalCollection> aCollections = new ArrayList<>();
 
     public Enclosure(String pName, String pType) {
         this.aName = pName;
-        this.aType = pType;
-    }
-
-
-    public void addAnimal(Animal pAnimal) {
-        aAnimal.add(pAnimal);
     }
 
     public List<Animal> getAnimal() {
         return new ArrayList<>(aAnimal);  // return a copy for encapsulation
     }
+
+    public void addAnimal(Animal pAnimal) {
+        aAnimal.add(pAnimal);
+    }
+
 
     public void removeAnimal(Animal pAnimal) {
         aAnimal.remove(pAnimal);
