@@ -1,28 +1,33 @@
 package com.example.oop2a4zms.Model;
 
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class Enclosure implements AnimalCollection, Iterable<Animal> {
-    private String aName;
-    private String aType;
-    private List<Animal> aAnimal = new ArrayList<>();
+    public String aName;
+    public String aType;
+    private final List<Animal> aAnimal = new ArrayList<>();
+    private final List<AnimalCollection> aCollections = new ArrayList<>();
 
     public Enclosure(String pName, String pType) {
         this.aName = pName;
         this.aType = pType;
     }
 
-
-    public void addAnimal(Animal pAnimal) {
-        aAnimal.add(pAnimal);
-    }
-
     public List<Animal> getAnimal() {
         return new ArrayList<>(aAnimal);  // return a copy for encapsulation
     }
+
+    public void addAnimal(Animal pAnimal) {
+        if (pAnimal != null) {
+            aAnimal.add(pAnimal);
+        }
+    }
+
 
     public void removeAnimal(Animal pAnimal) {
         aAnimal.remove(pAnimal);
@@ -49,7 +54,7 @@ public class Enclosure implements AnimalCollection, Iterable<Animal> {
         aName = name;
     }
 
-    public void getType(String type) {
+    public void setType(String type) {
         if (type == null || type.trim().isEmpty()) {
             throw new IllegalArgumentException("type cannot be null or empty");
         }
