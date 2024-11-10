@@ -54,8 +54,8 @@ public class CompositeAnimalCollectionViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("enclosure-view.fxml"));
         Parent view = fxmlLoader.load();
         EnclosureViewController newEnclosureViewController = fxmlLoader.getController();
-        // TODO: Uncomment next line once setEnclosure is implemented.
-        // newEnclosureViewController.setEnclosure(pEnclosure);
+
+         newEnclosureViewController.setEnclosure(pEnclosure);
         buildSceneAndStage(pEvent, view, pEnclosure.getName());
     }
 
