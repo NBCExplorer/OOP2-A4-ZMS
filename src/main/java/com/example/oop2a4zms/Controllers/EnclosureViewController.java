@@ -57,7 +57,6 @@ public class  EnclosureViewController {
 
     @FXML
     public void deleteAnimalFromEnclosure() {
-        // Code to delete the selected animal
         Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
             aEnclosure.removeAnimal(selectedAnimal);
