@@ -3,11 +3,13 @@ package com.example.oop2a4zms.Controllers;
 import com.example.oop2a4zms.Model.Animal;
 import com.example.oop2a4zms.Model.CompositeAnimalCollection;
 import com.example.oop2a4zms.Model.Enclosure;
+import com.example.oop2a4zms.ZooApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -22,25 +24,17 @@ import java.util.List;
 public class  EnclosureViewController {
     @FXML private ListView<Animal> aEnclosureListView;
 
-    private CompositeAnimalCollection bigCatsCollection;
-
     private Enclosure aEnclosure;
 
-    public EnclosureViewController(Enclosure enclosure) {
-        this.aEnclosure = enclosure;
-        refreshAnimalList();
+    public EnclosureViewController() {
+
     }
 
     @FXML
     public void initialize() {
-        List<Animal> animalList = new ArrayList<>();
-        Iterator<Animal> iterator = aEnclosure.iterator();
-
-        while (iterator.hasNext()) {
-            animalList.add(iterator.next());
+        if (aEnclosure != null) {
+            refreshAnimalList();
         }
-
-        aEnclosureListView.setItems(FXCollections.observableArrayList(animalList));
     }
 
     public void setEnclosure(Enclosure enclosure) {
@@ -53,7 +47,7 @@ public class  EnclosureViewController {
 
     }
 
-    @FXML
+
     public void displayModifyAnimal() {
         Animal selectedAnimal = aEnclosureListView.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
@@ -73,37 +67,43 @@ public class  EnclosureViewController {
     @FXML
     public void goBack() {
         // Code to go back to the previous view or main menu
+
     }
 
-    private void launchAnimalViewController(Animal selectedAnimal) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("animal-view.fxml"));
-            Parent animalView = fxmlLoader.load();
-
-            AnimalViewController animalController = fxmlLoader.getController();
-            animalController.setAnimal(selectedAnimal); // Pass the selected Animal to AnimalViewController
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(animalView));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     private void refreshAnimalList() {
         // TODO: Work with Itertator instead.
         if (aEnclosure != null) {
             List<Animal> animalList = new ArrayList<>();
-            Iterator<Animal> iterator = aEnclosure.iterator();
 
-            while (iterator.hasNext()) {
-                animalList.add(iterator.next());
+            for (Animal animal : aEnclosure) {
+                animalList.add(animal);
             }
 
             ObservableList<Animal> observableAnimalList = FXCollections.observableArrayList(animalList);
             aEnclosureListView.setItems(observableAnimalList);
+        }
+    }
+
+    private void launchAnimalViewController(Animal animal) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZooApplication.class.getResource("/com/example/oop2a4zms/animal-view.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            AnimalViewController controller = fxmlLoader.getController();
+            controller.setAnimal(animal);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Modify Animal");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(aEnclosureListView.getScene().getWindow());
+            stage.showAndWait();
+
+            refreshAnimalList();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
