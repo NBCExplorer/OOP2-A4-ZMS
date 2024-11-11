@@ -54,7 +54,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="nameTextField" layoutX="14.0" layoutY="48.0" />
+                        <TextField fx:id="aNameTextField" layoutX="14.0" layoutY="48.0" />
                      </children>
                   </Pane>
                   <Pane prefHeight="95.0" prefWidth="227.0" GridPane.rowIndex="1">
@@ -68,7 +68,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                       <children>
-                          <ComboBox fx:id="sexComboBox" layoutX="14.0" layoutY="48.0" prefWidth="150.0">
+                          <ComboBox fx:id="aSexComboBox" layoutX="14.0" layoutY="48.0" prefWidth="150.0">
                               <items>
                                   <FXCollections fx:factory="observableArrayList">
                                       <String fx:value="Male" />
@@ -89,7 +89,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="ageTextField" layoutX="14.0" layoutY="35.0" />
+                        <TextField fx:id="aAgeTextField" layoutX="14.0" layoutY="35.0" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -103,7 +103,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="weightTextField" layoutX="14.0" layoutY="35.0" />
+                        <TextField fx:id="aWeightTextField" layoutX="14.0" layoutY="35.0" />
                      </children>
                   </Pane>
                </children>
@@ -121,7 +121,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                   <Button fx:id="saveButton" mnemonicParsing="false" text="Save" onAction="#handleSaveButton" />
+                   <Button fx:id="aSaveButton" mnemonicParsing="false" text="Save" onAction="#handleSaveButton" />
                    <Button fx:id="closeButton" mnemonicParsing="false" text="Close" onAction="#handleCloseButton" GridPane.columnIndex="1" />
 
                </children>

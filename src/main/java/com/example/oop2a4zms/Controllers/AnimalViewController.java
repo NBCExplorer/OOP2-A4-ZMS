@@ -4,86 +4,103 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
+import com.example.oop2a4zms.Helpers.AlertHelper;
 import com.example.oop2a4zms.Model.Animal;
 import javafx.stage.Stage;
 
 public class AnimalViewController {
 
-    private Animal currentAnimal;
+    private Animal aCurrentAnimal;
 
     @FXML
-    private TextField nameTextField;
+    private TextField aNameTextField;
     @FXML
-    private ComboBox<String> sexComboBox;
+    private ComboBox<String> aSexComboBox;
     @FXML
-    private TextField ageTextField;
+    private TextField aAgeTextField;
     @FXML
-    private TextField weightTextField;
+    private TextField aWeightTextField;
     @FXML
-    private Button saveButton;
+    private Button aSaveButton;
 
     @FXML
     public void initialize() {
-        if (sexComboBox.getItems().isEmpty()) {
-            sexComboBox.getItems().addAll("Male", "Female");
+        if (aSexComboBox.getItems().isEmpty()) {
+            aSexComboBox.getItems().addAll("Male", "Female");
         }
     }
 
-    public void setAnimal(Animal animal) {
-        this.currentAnimal = animal;
-        if (animal != null) {
-            nameTextField.setText(animal.getName());
-            sexComboBox.setValue(animal.getSex());
-            ageTextField.setText(String.valueOf(animal.getAge()));
-            weightTextField.setText(String.valueOf(animal.getWeight()));
+    public void setAnimal(Animal pAnimal) {
+        this.aCurrentAnimal = pAnimal;
+
+        if (pAnimal != null) {
+            aNameTextField.setText(pAnimal.getName());
+            aSexComboBox.setValue(pAnimal.getSex());
+            aAgeTextField.setText(String.valueOf(pAnimal.getAge()));
+            aWeightTextField.setText(String.valueOf(pAnimal.getWeight()));
+
+        } else {
+
+            aNameTextField.clear();
+            aSexComboBox.setValue(null);
+            aAgeTextField.clear();
+            aWeightTextField.clear();
         }
     }
 
     @FXML
     private void handleSaveButton() {
-        if (currentAnimal != null) {
-            currentAnimal.setName(nameTextField.getText());
-            currentAnimal.setSex(sexComboBox.getValue());
-            try {
-                currentAnimal.setAge(Integer.parseInt(ageTextField.getText()));
-                currentAnimal.setWeight(Double.parseDouble(weightTextField.getText()));
-            } catch (NumberFormatException e) {
-                showAlert("Invalid Input", "Enter valid numbers for age and weight!");
+
+        if (aCurrentAnimal != null) {
+            String name = aNameTextField.getText().trim();
+            String sex = aSexComboBox.getValue();
+            String ageText = aAgeTextField.getText().trim();
+            String weightText = aWeightTextField.getText().trim();
+
+
+            if (name.isEmpty() || sex == null || ageText.isEmpty() || weightText.isEmpty()) {
+                AlertHelper.showWarning("Missing Information: Please fill in all fields!");
                 return;
             }
-            System.out.println("Animal updated successfully: " + currentAnimal);
+            aCurrentAnimal.setName(name);
+            aCurrentAnimal.setSex(sex);
 
-            // Close the stage after saving
+
+            try {
+
+                int age = Integer.parseInt(ageText);
+                double weight = Double.parseDouble(weightText);
+
+                if (age < 0 || weight < 0) {
+                    AlertHelper.showWarning("Invalid Input: Age and weight must be positive numbers!");
+                    return;
+                }
+
+                aCurrentAnimal.setAge(age);
+                aCurrentAnimal.setWeight(weight);
+            } catch (NumberFormatException e) {
+                AlertHelper.showWarning("Invalid Input: Enter valid numbers for age and weight!");
+                return;
+            }
+
+
             closeWindow();
         } else {
-            showAlert("No Animal Selected", "Please select an animal to edit.");
+            AlertHelper.showWarning("No Animal Selected: Please select an animal to edit!");
         }
     }
 
     @FXML
     private void handleCloseButton() {
-        System.out.println("Close button clicked");
-        nameTextField.clear();
-        sexComboBox.setValue(null);
-        ageTextField.clear();
-        weightTextField.clear();
-
-
-        closeWindow();
+        boolean confirmClose = AlertHelper.showConfirmation("Are you sure you want to close without saving?");
+        if (confirmClose) {
+            closeWindow();
+        }
     }
+
+
     private void closeWindow() {
-        Stage stage = (Stage) saveButton.getScene().getWindow();
+        Stage stage = (Stage) aSaveButton.getScene().getWindow();
         stage.close();
-    }
-
-
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
